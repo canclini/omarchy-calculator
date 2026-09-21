@@ -2,15 +2,24 @@
   "schemaVersion": 1,
   "id": "io.github.canclini.calculator",
   "name": "Calculator",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "author": "Marcel Canclini",
   "license": "MIT",
   "description": "Spotlight-style quick calculator: the result appears as you type, Enter copies it to the clipboard",
   "kinds": [
-    "overlay"
+    "overlay",
+    "bar-widget"
   ],
   "keepLoaded": true,
   "entryPoints": {
-    "overlay": "Calculator.qml"
+    "overlay": "Calculator.qml",
+    "barWidget": "BarWidget.qml"
+  },
+  "barWidget": {
+    "displayName": "Calculator",
+    "description": "Opens the quick calculator",
+    "category": "Utilities",
+    "allowMultiple": false,
+    "defaultSection": "center"
   }
 }

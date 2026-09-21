@@ -15,11 +15,18 @@ dependencies.
 omarchy plugin add https://github.com/canclini/omarchy-calculator.git --enable
 ```
 
+A calculator icon appears in the center of the bar; click it to open the calculator. Move it
+with `omarchy bar move io.github.canclini.calculator --section right`.
+
 Update it with:
 
 ```bash
 omarchy plugin update io.github.canclini.calculator
 ```
+
+Coming from 1.0? The icon is only placed when the plugin is enabled, so run
+`omarchy plugin disable io.github.canclini.calculator` and then
+`omarchy plugin enable io.github.canclini.calculator` once after updating.
 
 ## Open it from the keyboard
 
@@ -76,7 +83,7 @@ number. Results always use a decimal point so they paste anywhere.
 omarchy plugin remove io.github.canclini.calculator
 ```
 
-Then delete the keybinding and menu line you added.
+This also takes the icon off the bar. Then delete the keybinding and menu line you added.
 
 ## Contributing
 

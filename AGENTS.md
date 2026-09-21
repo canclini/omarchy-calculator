@@ -4,7 +4,10 @@
 
 - The plugin never binds keys, edits files outside its own folder, or writes user
   configuration (`~/.config/hypr/`, `shell.json`, `omarchy-menu.jsonc`). Keybinding and menu
-  entry are documented in the README for users to add themselves.
+  entry are documented in the README for users to add themselves. The bar icon is placed by
+  the host on `omarchy plugin enable`, from `barWidget.defaultSection` in the manifest.
+- `BarWidget.qml` opens the overlay with `bar.shell.toggle(moduleName, "{}")`, never with
+  `bar.run(...)`.
 - No network access, no `eval()`, no shell commands built from user input. The only external
   command is `wl-copy` with the result as a separate argument.
 - Plugin id `io.github.canclini.calculator` is a permanent marketplace identifier; do not rename.
