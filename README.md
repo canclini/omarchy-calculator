@@ -7,7 +7,9 @@ appears next to it as you type. `Enter` copies the result to the clipboard and c
 
 ## Install
 
-Requires **Omarchy 4**. The calculator follows the active Omarchy theme.
+Requires **Omarchy 4**. The calculator follows the active Omarchy theme. Copying the result
+uses `wl-copy` from `wl-clipboard`, which Omarchy installs by default; there are no other
+dependencies.
 
 ```bash
 omarchy plugin add https://github.com/canclini/omarchy-calculator.git --enable
