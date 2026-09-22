@@ -3,8 +3,9 @@
 There is no issue tracker here. A bug report asks somebody else to reproduce a problem and
 find the time to fix it; a pull request is the same information with the answer already in
 it. Coding agents make that a fair thing to ask: point Codex, Claude Code, or whatever you
-use at this checkout, describe what went wrong, and let it read the code. The working notes
-it needs are in [AGENTS.md](AGENTS.md).
+use at this checkout, describe what went wrong, and let it read the code. This file holds
+the working notes it needs; there is deliberately no agent-instruction file in the plugin
+folder, because that folder is installed on other people's machines.
 
 ## You found a bug
 
@@ -26,6 +27,15 @@ the README tells users which lines to add themselves.
 New syntax is welcome when it is what people type into a calculator. Unit conversion,
 currency rates, history, or anything that needs the network belongs in a different plugin.
 
+A few things are fixed:
+
+- `BarWidget.qml` opens the overlay with `bar.shell.toggle(moduleName, "{}")`, never with
+  `bar.run(...)`. The bar icon is placed by the host on `omarchy plugin enable`, from
+  `barWidget.defaultSection` in the manifest.
+- No network access, no `eval()`, no shell commands built from user input. The only external
+  command is `wl-copy`, with the result passed as a separate argument.
+- The plugin id `io.github.canclini.calculator` is a permanent marketplace identifier.
+
 ## Run it
 
 Link your checkout into the shell and enable it:
@@ -38,6 +48,10 @@ omarchy-shell shell toggle io.github.canclini.calculator
 
 After every change run `omarchy restart shell`. The shell's hot reload reports that it
 reloaded the plugin but can keep running the old code.
+
+`console.log` from the plugin does not reach the journal; use `console.warn` while debugging.
+When driving the overlay with `wtype`, a bare `-` argument makes wtype read stdin; use
+`wtype -- -`.
 
 ## Checks
 
@@ -53,8 +67,9 @@ Both have to pass before you open the pull request. Nothing in CI runs them for 
 | Parsing, percent rules, functions, formatting in `CalcModel.js` | Add cases to `test/calc-model.test.js` and update the README table |
 | Keys, focus, layout in `Calculator.qml` | Drive it by hand in a light and a dark theme and add a screenshot to the pull request |
 
-`CalcModel.js` runs inside the Quickshell JavaScript engine, so keep it to ES5: no arrow
-functions, `let`, `BigInt`, or regex lookbehind.
+`CalcModel.js` is a QML `.pragma library` module that runs inside the Quickshell JavaScript
+engine, so keep it to ES5: no arrow functions, `let`, `BigInt`, `Object.is`, or regex
+lookbehind. The test strips the pragma line and runs the file under node.
 
 ## The pull request
 
